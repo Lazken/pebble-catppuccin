@@ -1,0 +1,51 @@
+{
+    "displayName": "pebbleCat",
+    "uuid": "5e70c783-0bf9-412b-8689-dd0966198607",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+        "aplite",
+        "basalt",
+        "chalk",
+        "diorite",
+        "emery",
+        "flint",
+        "gabbro"
+    ],
+    "watchapp": {
+        "watchface": true
+    },
+    "capabilities": [
+        "configurable"
+    ],
+    "messageKeys": {
+        "CATPPUCCIN_FLAVOR": 10000
+    },
+    "resources": {
+        "media": [
+            {
+                "type": "font",
+                "name": "FONT_CASKAY_42",
+                "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+            },
+            {
+                "type": "font",
+                "name": "FONT_CASKAY_24",
+                "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+            },
+            {
+                "type": "font",
+                "name": "FONT_CASKAY_16",
+                "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+            }
+        ]
+    },
+    "name": "pebbleCat",
+    "shortName": "pebbleCat",
+    "longName": "pebbleCat",
+    "versionLabel": "1.0.0",
+    "companyName": "MakeAwesomeHappen",
+    "appKeys": {
+        "CATPPUCCIN_FLAVOR": 10000
+    }
+}

@@ -1,0 +1,55 @@
+{
+  "name": "pebbleCat",
+  "author": "MakeAwesomeHappen",
+  "version": "1.0.0",
+  "keywords": [
+    "pebble-app"
+  ],
+  "private": true,
+  "dependencies": {
+    "@rebble/clay": "^1.0.10"
+  },
+  "pebble": {
+    "displayName": "pebbleCat",
+    "uuid": "5e70c783-0bf9-412b-8689-dd0966198607",
+    "sdkVersion": "3",
+    "enableMultiJS": true,
+    "targetPlatforms": [
+      "aplite",
+      "basalt",
+      "chalk",
+      "diorite",
+      "emery",
+      "flint",
+      "gabbro"
+    ],
+    "watchapp": {
+      "watchface": true
+    },
+    "capabilities": [
+      "configurable"
+    ],
+    "messageKeys": [
+      "CATPPUCCIN_FLAVOR"
+    ],
+    "resources": {
+      "media": [
+        {
+          "type": "font",
+          "name": "FONT_CASKAY_42",
+          "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+        },
+        {
+          "type": "font",
+          "name": "FONT_CASKAY_24",
+          "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+        },
+        {
+          "type": "font",
+          "name": "FONT_CASKAY_16",
+          "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+        }
+      ]
+    }
+  }
+}
