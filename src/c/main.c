@@ -211,6 +211,7 @@ static void apply_palette(void) {
   if (s_main_window) window_set_background_color(s_main_window, s_palette->surface0);
   if (s_time_layer) text_layer_set_text_color(s_time_layer, s_palette->text);
   if (s_date_layer) text_layer_set_text_color(s_date_layer, s_palette->red);
+  if (s_battery_layer) text_layer_set_text_color(s_battery_layer, s_palette->green);
 }
 
 static GColor battery_color_for_level(int level) {
@@ -220,7 +221,7 @@ static GColor battery_color_for_level(int level) {
   if (level <= 30) {
     return s_palette->yellow;
   }
-  return s_palette->green;
+  return s_palette->red;
 }
 
 static void battery_layer_update_color(void) {
