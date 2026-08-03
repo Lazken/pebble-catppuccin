@@ -217,7 +217,7 @@ static GColor battery_color_for_level(int level) {
   if (level <= 10) {
     return s_palette->red;
   }
-  if (level <= 25) {
+  if (level <= 30) {
     return s_palette->yellow;
   }
   return s_palette->green;
@@ -232,7 +232,21 @@ static void battery_layer_update_color(void) {
 static void battery_layer_update_text(void) {
   if (s_battery_layer) {
     static char s_battery_buffer[8];
-    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d", s_battery_level);
+    if (s_battery_level < 10) {
+      snprintf(s_battery_buffer, sizeof(s_battery_buffer), "");
+    }
+    else if (s_battery_level < 30) {
+      snprintf(s_battery_buffer, sizeof(s_battery_buffer), "");
+    }
+    else if (s_battery_level < 60) {
+      snprintf(s_battery_buffer, sizeof(s_battery_buffer), "");
+    }
+    else if (s_battery_level < 80) {
+      snprintf(s_battery_buffer, sizeof(s_battery_buffer), "");
+    }
+    else {
+      snprintf(s_battery_buffer, sizeof(s_battery_buffer), "");
+    }
     text_layer_set_text(s_battery_layer, s_battery_buffer);
   }
 }
