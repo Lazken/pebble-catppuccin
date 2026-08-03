@@ -132,13 +132,11 @@ static const CatppuccinPalette CATPPUCCIN_PALETTE_MOCHA = {
   .flamingo = GColorFromHEX(0xF2CDCD),
   .pink = GColorFromHEX(0xF5C2E7),
   .mauve = GColorFromHEX(0xCBA6F7),
-  //.red = GColorFromHEX(0xF38BA8),
-  .red = GColorFromHEX(0x40A02B),
+  .red = GColorFromHEX(0xF38BA8),
   .maroon = GColorFromHEX(0xEBA0AC),
   .peach = GColorFromHEX(0xFAB387),
   .yellow = GColorFromHEX(0xF9E2AF),
-  //.green = GColorFromHEX(0xA6E3A1),
-  .green = GColorFromHEX(0x40A02B),
+  .green = GColorFromHEX(0xA6E3A1),
   .teal = GColorFromHEX(0x94E2D5),
   .sky = GColorFromHEX(0x89DCEB),
   .sapphire = GColorFromHEX(0x74C7EC),
@@ -218,10 +216,10 @@ static void apply_palette(void) {
 
 static GColor battery_color_for_level(int level) {
   if (level <= 10) {
-    return s_palette->red;
+    return s_palette->green;
   }
   if (level <= 30) {
-    return s_palette->yellow;
+    return s_palette->green;
   }
   return s_palette->green;
 }
