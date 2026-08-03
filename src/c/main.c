@@ -280,7 +280,7 @@ static void main_window_load(Window *window) {
   if (!s_palette) {
     s_palette = palette_for_flavor(CATPPUCCIN_FLAVOR_MOCHA);
   }
-  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_42));
+  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_56));
   s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_24));
 
   Layer *window_layer = window_get_root_layer(window);
