@@ -210,7 +210,7 @@ static void apply_palette(void) {
   }
   if (s_main_window) window_set_background_color(s_main_window, s_palette->surface0);
   if (s_time_layer) text_layer_set_text_color(s_time_layer, s_palette->text);
-  if (s_date_layer) text_layer_set_text_color(s_date_layer, s_palette->red);
+  if (s_date_layer) text_layer_set_text_color(s_date_layer, s_palette->blue);
   if (s_battery_layer) text_layer_set_text_color(s_battery_layer, s_palette->green);
 }
 
@@ -221,7 +221,7 @@ static GColor battery_color_for_level(int level) {
   if (level <= 30) {
     return s_palette->yellow;
   }
-  return s_palette->red;
+  return s_palette->green;
 }
 
 static void battery_layer_update_color(void) {
@@ -310,14 +310,14 @@ static void main_window_load(Window *window) {
 
   s_time_layer = text_layer_create(GRect(0, time_y, bounds.size.w, 60));
   text_layer_set_background_color(s_time_layer, GColorClear);
-  text_layer_set_text_color(s_time_layer, s_palette->sky);
+  text_layer_set_text_color(s_time_layer, s_palette->text);
   text_layer_set_font(s_time_layer, s_time_font);
   text_layer_set_text_alignment(s_time_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(s_time_layer));
 
   s_date_layer = text_layer_create(GRect(0, date_y, bounds.size.w, 30));
   text_layer_set_background_color(s_date_layer, GColorClear);
-  text_layer_set_text_color(s_date_layer, s_palette->red);
+  text_layer_set_text_color(s_date_layer, s_palette->mauve);
   text_layer_set_font(s_date_layer, s_date_font);
   text_layer_set_text_alignment(s_date_layer, GTextAlignmentCenter);
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
@@ -326,7 +326,7 @@ static void main_window_load(Window *window) {
   int battery_width = 30;
   s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 20));
   text_layer_set_background_color(s_battery_layer, GColorClear);
-  text_layer_set_text_color(s_battery_layer, s_palette->red);
+  text_layer_set_text_color(s_battery_layer, s_palette->green);
   text_layer_set_font(s_battery_layer, s_battery_font);
   layer_add_child(window_layer, text_layer_get_layer(s_battery_layer));
   battery_layer_update_text();
