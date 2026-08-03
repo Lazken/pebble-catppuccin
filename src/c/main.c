@@ -306,7 +306,7 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
 
   int margin = 2;
-  int battery_width = 44;
+  int battery_width = 80;
   s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 24));
   text_layer_set_background_color(s_battery_layer, GColorClear);
   text_layer_set_text_color(s_battery_layer, s_palette->text);
