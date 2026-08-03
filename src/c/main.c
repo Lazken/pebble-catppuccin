@@ -231,7 +231,7 @@ static void battery_layer_update_color(void) {
 static void battery_layer_update_text(void) {
   if (s_battery_layer) {
     static char s_battery_buffer[8];
-    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", s_battery_level);
+    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", s_battery_level);
     text_layer_set_text(s_battery_layer, s_battery_buffer);
   }
 }
@@ -306,8 +306,8 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
 
   int margin = 2;
-  int battery_width = 80;
-  s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 24));
+  int battery_width = 120;
+  s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 120));
   text_layer_set_background_color(s_battery_layer, GColorClear);
   text_layer_set_text_color(s_battery_layer, s_palette->text);
   text_layer_set_font(s_battery_layer, s_date_font);
