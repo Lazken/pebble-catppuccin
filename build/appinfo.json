@@ -25,6 +25,11 @@
         "media": [
             {
                 "type": "font",
+                "name": "FONT_CASKAY_56",
+                "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
+            },
+            {
+                "type": "font",
                 "name": "FONT_CASKAY_42",
                 "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf"
             },

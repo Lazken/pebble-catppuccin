@@ -153,7 +153,7 @@
 /* 5 */
 /***/ (function(module, exports) {
 
-	module.exports = {"CATPPUCCIN_FLAVOR":10001,"dummy":10000}
+	module.exports = {"CATPPUCCIN_FLAVOR":10000}
 
 /***/ }),
 /* 6 */

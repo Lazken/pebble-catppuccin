@@ -7,4 +7,3 @@
 //
 
 extern uint32_t MESSAGE_KEY_CATPPUCCIN_FLAVOR;
-extern uint32_t MESSAGE_KEY_dummy;

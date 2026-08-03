@@ -231,7 +231,7 @@ static void battery_layer_update_color(void) {
 static void battery_layer_update_text(void) {
   if (s_battery_layer) {
     static char s_battery_buffer[8];
-    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", s_battery_level);
+    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", s_battery_level);
     text_layer_set_text(s_battery_layer, s_battery_buffer);
   }
 }

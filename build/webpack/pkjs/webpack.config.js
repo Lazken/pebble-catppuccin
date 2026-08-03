@@ -6,7 +6,7 @@ const isSandbox = false;
 
 // Array with absolute file path strings
 const entryFilenames = ["_pkjs_shared_additions.js",
-"/home/laz/repos/pebbleCat/src/pkjs/index.js"];
+"/home/brambo/repos/personal/pebble-catppuccin/src/pkjs/index.js"];
 
 // folder path string
 const outputPath = "build";
@@ -15,14 +15,14 @@ const outputPath = "build";
 const outputFilename = "pebble-js-app.js";
 
 // Array with absolute folder path strings
-const resolveRoots = ["/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/common/include",
-"/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/common/tools/webpack",
-"/home/laz/.local/share/pebble-sdk/SDKs/current/node_modules",
-"/home/laz/repos/pebbleCat/build/js"];
+const resolveRoots = ["/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/common/include",
+"/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/common/tools/webpack",
+"/home/brambo/.local/share/pebble-sdk/SDKs/current/node_modules",
+"/home/brambo/repos/personal/pebble-catppuccin/build/js"];
 
 // Object, { alias1: 'path1', ... }
 const resolveAliases = {"@rebble/clay": "@rebble/clay/dist/js",
-"app_package.json": "/home/laz/repos/pebbleCat/package.json"};
+"app_package.json": "/home/brambo/repos/personal/pebble-catppuccin/package.json"};
 
 // null or Object with key 'sourceMapFilename'
 const sourceMapConfig = {"sourceMapFilename": "pebble-js-app.js.map"};

@@ -1,24 +1,24 @@
-# project  configured on Thu Jul 30 17:48:41 2026 by
-# waf 2.1.4 (abi 20, python 30e06f0 on linux)
-# using /home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/waf configure
+# project  configured on Mon Aug  3 13:15:04 2026 by
+# waf 2.1.4 (abi 20, python 30c0cf0 on linux)
+# using /home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/waf configure
 #
 ----------------------------------------
 Setting top to
-/home/laz/repos/pebbleCat
+/home/brambo/repos/personal/pebble-catppuccin
 ----------------------------------------
 Setting out to
-/home/laz/repos/pebbleCat/build
+/home/brambo/repos/personal/pebble-catppuccin/build
 ----------------------------------------
 Checking for program 'webpack'
-/home/laz/.local/share/pebble-sdk/SDKs/current/node_modules/.bin/webpack
-find program=['webpack'] paths=['/home/laz/.local/share/pebble-sdk/SDKs/current/node_modules/.bin'] var='WEBPACK' -> ['/home/laz/.local/share/pebble-sdk/SDKs/current/node_modules/.bin/webpack']
+/home/brambo/.local/share/pebble-sdk/SDKs/current/node_modules/.bin/webpack
+find program=['webpack'] paths=['/home/brambo/.local/share/pebble-sdk/SDKs/current/node_modules/.bin'] var='WEBPACK' -> ['/home/brambo/.local/share/pebble-sdk/SDKs/current/node_modules/.bin/webpack']
 ----------------------------------------
 Found Pebble SDK for gabbro in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/gabbro
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/gabbro
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -427,14 +427,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for flint in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/flint
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/flint
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -843,14 +843,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for emery in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/emery
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/emery
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -1259,14 +1259,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for diorite in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/diorite
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/diorite
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -1675,14 +1675,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for chalk in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/chalk
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/chalk
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2091,14 +2091,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for basalt in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/basalt
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/basalt
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2507,14 +2507,14 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
 ----------------------------------------
 Found Pebble SDK for aplite in:
-/home/laz/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/aplite
+/home/brambo/.local/share/pebble-sdk/SDKs/current/sdk-core/pebble/aplite
 ----------------------------------------
 Checking for program 'gcc, cc'
 arm-none-eabi-gcc
-find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
+find program=['gcc', 'cc'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='CC' -> ['arm-none-eabi-gcc']
 ['arm-none-eabi-gcc', '-dM', '-E', '-']
 out: #define __DBL_MIN_EXP__ (-1021)
 #define __HQ_FBIT__ 15
@@ -2923,4 +2923,4 @@ out: #define __DBL_MIN_EXP__ (-1021)
 ----------------------------------------
 Checking for program 'ar'
 arm-none-eabi-ar
-find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/laz/.local/share/uv/tools/pebble-tool/lib/python3.14/site-packages/pebble_tool/commands/sdk', '/home/laz/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/laz/.opam/default/bin', '/home/laz/.local/bin', '/home/laz/.local/bin', '/home/laz/.cargo/bin', '/home/laz/.tmux/plugins/tmuxifier/bin', '/home/laz/.tmux/plugins/tmuxifier/libexec', '/home/laz/.local/bin', '/home/laz/.opam/default/bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']
+find program=['ar'] paths=['/var/tmp/pebble-sdk/SDKs/4.17/toolchain/moddable-tools', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/arm-none-eabi/bin', '/home/brambo/.local/share/uv/tools/pebble-tool/lib/python3.12/site-packages/pebble_tool/commands/sdk', '/home/brambo/.local/share/pebble-sdk/SDKs/4.17/toolchain/bin', '/home/brambo/.local/share/../bin', '/home/brambo/.local/share/../bin', '/home/brambo/.cargo/bin', '/home/brambo/.tmux/plugins/tmuxifier/bin', '/home/brambo/.tmux/plugins/tmuxifier/libexec', '/home/brambo/.local/share/../bin', '/usr/local/sbin', '/usr/local/bin', '/usr/bin', '/usr/bin/site_perl', '/usr/bin/vendor_perl', '/usr/bin/core_perl'] var='AR' -> ['arm-none-eabi-ar']

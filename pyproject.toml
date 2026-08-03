@@ -1,0 +1,17 @@
+[project]
+name = "pebble-catppuccin"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+authors = [
+    { name = "Lazken", email = "bramborremans@gmail.com" }
+]
+requires-python = ">=3.12"
+dependencies = []
+
+[project.scripts]
+pebble-catppuccin = "pebble_catppuccin:main"
+
+[build-system]
+requires = ["uv_build>=0.12.1,<0.13.0"]
+build-backend = "uv_build"
