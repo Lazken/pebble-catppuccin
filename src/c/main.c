@@ -232,7 +232,7 @@ static void battery_layer_update_color(void) {
 static void battery_layer_update_text(void) {
   if (s_battery_layer) {
     static char s_battery_buffer[8];
-    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d%%", s_battery_level);
+    snprintf(s_battery_buffer, sizeof(s_battery_buffer), "%d", s_battery_level);
     text_layer_set_text(s_battery_layer, s_battery_buffer);
   }
 }
@@ -283,7 +283,7 @@ static void main_window_load(Window *window) {
   }
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYBOLD_56));
   s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_24));
-  s_battery_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_16));
+  s_battery_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYICONS_16));
 
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
