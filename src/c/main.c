@@ -299,7 +299,7 @@ static void main_window_load(Window *window) {
   }
   s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYBOLD_56));
   s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_24));
-  s_battery_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYICONS_20));
+  s_battery_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYICONS_40));
 
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
@@ -324,8 +324,8 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
 
   int margin = 2;
-  int battery_width = 30;
-  s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 20));
+  int battery_width = 60;
+  s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 40));
   text_layer_set_background_color(s_battery_layer, GColorClear);
   text_layer_set_text_color(s_battery_layer, s_palette->green);
   text_layer_set_font(s_battery_layer, s_battery_font);

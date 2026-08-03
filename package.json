@@ -55,7 +55,7 @@
         },
         {
           "type": "font",
-          "name": "FONT_CASKAYICONS_20",
+          "name": "FONT_CASKAYICONS_40",
           "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf",
           "characterRegex": "[ -~\uF4C8\uF240-\uF244]"
         }
