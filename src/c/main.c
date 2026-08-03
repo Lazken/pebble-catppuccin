@@ -211,7 +211,6 @@ static void apply_palette(void) {
   if (s_main_window) window_set_background_color(s_main_window, s_palette->surface0);
   if (s_time_layer) text_layer_set_text_color(s_time_layer, s_palette->text);
   if (s_date_layer) text_layer_set_text_color(s_date_layer, s_palette->blue);
-  if (s_battery_layer) text_layer_set_text_color(s_date_layer, s_palette->green);
 }
 
 static GColor battery_color_for_level(int level) {
@@ -326,7 +325,7 @@ static void main_window_load(Window *window) {
   int battery_width = 30;
   s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 20));
   text_layer_set_background_color(s_battery_layer, GColorClear);
-  text_layer_set_text_color(s_battery_layer, s_palette->green);
+  text_layer_set_text_color(s_battery_layer, s_palette->red);
   text_layer_set_font(s_battery_layer, s_battery_font);
   layer_add_child(window_layer, text_layer_get_layer(s_battery_layer));
   battery_layer_update_text();
