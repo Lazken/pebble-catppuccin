@@ -166,6 +166,7 @@ static TextLayer *s_date_layer;
 static TextLayer *s_battery_layer;
 static GFont s_time_font;
 static GFont s_date_font;
+static GFont s_battery_font;
 static int s_battery_level;
 static AppSettings s_settings;
 static const CatppuccinPalette *s_palette;
@@ -280,8 +281,9 @@ static void main_window_load(Window *window) {
   if (!s_palette) {
     s_palette = palette_for_flavor(CATPPUCCIN_FLAVOR_MOCHA);
   }
-  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_56));
+  s_time_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAYBOLD_56));
   s_date_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_24));
+  s_battery_font = fonts_load_custom_font(resource_get_handle(RESOURCE_ID_FONT_CASKAY_16));
 
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
@@ -310,7 +312,7 @@ static void main_window_load(Window *window) {
   s_battery_layer = text_layer_create(GRect(bounds.size.w - battery_width - margin, margin, battery_width, 120));
   text_layer_set_background_color(s_battery_layer, GColorClear);
   text_layer_set_text_color(s_battery_layer, s_palette->text);
-  text_layer_set_font(s_battery_layer, s_date_font);
+  text_layer_set_font(s_battery_layer, s_battery_font);
   text_layer_set_text_alignment(s_battery_layer, GTextAlignmentRight);
   layer_add_child(window_layer, text_layer_get_layer(s_battery_layer));
   battery_layer_update_text();
