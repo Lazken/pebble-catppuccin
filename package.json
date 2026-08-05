@@ -27,7 +27,8 @@
       "messageKeys": [
         "CATPPUCCIN_FLAVOR",
         "SHOW_HEARTRATE",
-        "SHOW_HEARTRATE_INTERVAL"
+        "SHOW_HEARTRATE_MODE",
+        "SHOW_STEPS"
       ],
     "resources": {
       "media": [

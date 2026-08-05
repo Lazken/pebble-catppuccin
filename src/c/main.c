@@ -10,11 +10,10 @@
 #define SETTINGS_KEY_HEARTRATE_MODE 3
 #define SETTINGS_KEY_STEPS 4
 
+extern uint32_t MESSAGE_KEY_CATPPUCCIN_FLAVOR;
 extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE;
-// Use numeric message key IDs (matching package.json) to avoid relying on
-// auto-generated symbols during build.
-#define MESSAGE_KEY_SHOW_HEARTRATE_MODE 10002
-#define MESSAGE_KEY_SHOW_STEPS 10003
+extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE_MODE;
+extern uint32_t MESSAGE_KEY_SHOW_STEPS;
 
 typedef struct {
   CatppuccinFlavor flavor;
