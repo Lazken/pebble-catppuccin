@@ -1,30 +1,47 @@
 #pragma once
 
 #include <pebble.h>
+#include <stdio.h>
 
-#define COLORROSEWATER GColorFromHEX(0XF5E0DC)
-#define COLORFLAMINGO GColorFromHEX(0XF2CDCD)
-#define COLORPINK GColorFromHEX(0XF5C2E7)
-#define COLORMAUVE GColorFromHEX(0XCBA6F7)
-#define COLORRED GColorFromHEX(0XF38BA8)
-#define COLORMAROON GColorFromHEX(0XEBA0AC)
-#define COLORPEACH GColorFromHEX(0XFAB387)
-#define COLORYELLOW GColorFromHEX(0XF9E2AF)
-#define COLORGREEN GColorFromHEX(0XA6E3A1)
-#define COLORTEAL GColorFromHEX(0X94E2D5)
-#define COLORSKY GColorFromHEX(0X89DCEB)
-#define COLORSAPPHIRE GColorFromHEX(0X74C7EC)
-#define COLORBLUE GColorFromHEX(0X89B4FA)
-#define COLORLAVENDER GColorFromHEX(0XB4BEFE)
-#define COLORTEXT GColorFromHEX(0XCDD6F4)
-#define COLORSUBTEXT1 GColorFromHEX(0XBAC2DE)
-#define COLORSUBTEXT0 GColorFromHEX(0XA6ADC8)
-#define COLOROVERLAY2 GColorFromHEX(0X9399B2)
-#define COLOROVERLAY1 GColorFromHEX(0X7F849C)
-#define COLOROVERLAY0 GColorFromHEX(0X6C7086)
-#define COLORSURFACE2 GColorFromHEX(0X585B70)
-#define COLORSURFACE1 GColorFromHEX(0X45475A)
-#define COLORSURFACE0 GColorFromHEX(0X313244)
-#define COLORBASE GColorFromHEX(0X1E1E2E)
-#define COLORMANTLE GColorFromHEX(0X181825)
-#define COLORCRUST GColorFromHEX(0X11111B)
+typedef enum {
+  CATPPUCCIN_FLAVOR_LATTE = 0,
+  CATPPUCCIN_FLAVOR_FRAPPE = 1,
+  CATPPUCCIN_FLAVOR_MACCHIATO = 2,
+  CATPPUCCIN_FLAVOR_MOCHA = 3,
+} CatppuccinFlavor;
+
+typedef struct {
+  GColor rosewater;
+  GColor flamingo;
+  GColor pink;
+  GColor mauve;
+  GColor red;
+  GColor maroon;
+  GColor peach;
+  GColor yellow;
+  GColor green;
+  GColor teal;
+  GColor sky;
+  GColor sapphire;
+  GColor blue;
+  GColor lavender;
+  GColor text;
+  GColor subtext1;
+  GColor subtext0;
+  GColor overlay2;
+  GColor overlay1;
+  GColor overlay0;
+  GColor surface2;
+  GColor surface1;
+  GColor surface0;
+  GColor base;
+  GColor mantle;
+  GColor crust;
+} CatppuccinPalette;
+extern const CatppuccinPalette CATPPUCCIN_PALETTE_LATTE;
+extern const CatppuccinPalette CATPPUCCIN_PALETTE_FRAPPE;
+extern const CatppuccinPalette CATPPUCCIN_PALETTE_MACCHIATO;
+extern const CatppuccinPalette CATPPUCCIN_PALETTE_MOCHA;
+
+const CatppuccinPalette *palette_for_flavor(CatppuccinFlavor flavor);
+CatppuccinFlavor flavor_from_string(const char *value);
