@@ -8,11 +8,12 @@ static const CatppuccinPalette *g_palette = NULL;
 static bool g_enabled = false;
 static int g_steps = -1; // -1 = unknown
 static GFont g_font = NULL;
+static AppTimer *g_poll_timer = NULL;
+static const uint32_t POLL_INTERVAL_MS = 10000; // 10s
 
 static void update_layer_text(void) {
   if (!g_steps_layer) return;
   static char buffer[32];
-  /* Use the walking glyph (private use area U+E213) followed by the steps count. */
   if (g_steps >= 0) {
     snprintf(buffer, sizeof(buffer), " %d", g_steps);
   } else {
@@ -24,18 +25,29 @@ static void update_layer_text(void) {
 void steps_set_palette(const CatppuccinPalette *palette) {
   g_palette = palette;
   if (g_steps_layer && g_palette) {
-    // Steps should use the palette's peach color (not red). Use peach.
     text_layer_set_text_color(g_steps_layer, g_palette->peach);
   }
 }
 
 #if defined(PBL_HEALTH)
 static void health_handler(HealthEventType event, void *context) {
-  // On any health event, peek the current step count and update if available
-  HealthValue v = health_service_peek_current_value(HealthMetricStepCount);
+  // Use the day's total rather than the instantaneous sample.
+  HealthValue v = health_service_sum_today(HealthMetricStepCount);
+  APP_LOG(APP_LOG_LEVEL_INFO, "steps: health event %d, sum_today=%d", (int)event, (int)v);
   if (v >= 0) {
     steps_update_count((int)v);
   }
+}
+
+static void poll_cb(void *context) {
+  (void)context;
+  HealthValue v = health_service_sum_today(HealthMetricStepCount);
+  APP_LOG(APP_LOG_LEVEL_INFO, "steps: poll sum_today=%d", (int)v);
+  if (v >= 0) {
+    steps_update_count((int)v);
+  }
+  // reschedule
+  g_poll_timer = app_timer_register(POLL_INTERVAL_MS, poll_cb, NULL);
 }
 #endif
 
@@ -44,10 +56,8 @@ void steps_set_enabled(bool enabled) {
   g_enabled = enabled;
   if (g_enabled) {
 #if defined(PBL_HEALTH)
-    // Always subscribe to health events so we receive updates when available.
     health_service_events_subscribe(health_handler, NULL);
 
-    // Check accessibility over a reasonable range (start of day -> now) for step totals.
     time_t now = time(NULL);
     struct tm tm_now = *localtime(&now);
     tm_now.tm_hour = 0;
@@ -57,21 +67,23 @@ void steps_set_enabled(bool enabled) {
 
     HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricStepCount, start_of_day, now);
 
-    // If accessible, peek the current value. Also attempt a peek even if accessibility
-    // reports not available, since some platforms return cumulative values regardless.
     if (accessible & HealthServiceAccessibilityMaskAvailable) {
-      HealthValue v = health_service_peek_current_value(HealthMetricStepCount);
-      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x, peek=%d", (int)accessible, (int)v);
+      HealthValue v = health_service_sum_today(HealthMetricStepCount);
+      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x, sum_today=%d", (int)accessible, (int)v);
       if (v >= 0) steps_update_count((int)v);
     } else {
-      HealthValue v = health_service_peek_current_value(HealthMetricStepCount);
-      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x (not available), peek=%d", (int)accessible, (int)v);
+      HealthValue v = health_service_sum_today(HealthMetricStepCount);
+      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x (not available), sum_today=%d", (int)accessible, (int)v);
       if (v >= 0) steps_update_count((int)v);
     }
 #endif
+    // start polling (reschedules itself)
+    if (g_poll_timer) { app_timer_cancel(g_poll_timer); g_poll_timer = NULL; }
+    g_poll_timer = app_timer_register(POLL_INTERVAL_MS, poll_cb, NULL);
   } else {
 #if defined(PBL_HEALTH)
     health_service_events_unsubscribe();
+    if (g_poll_timer) { app_timer_cancel(g_poll_timer); g_poll_timer = NULL; }
 #endif
     g_steps = -1;
     update_layer_text();
@@ -102,12 +114,12 @@ void steps_window_load(Window *window, GFont icon_font, const CatppuccinPalette 
   }
 
   if (g_palette) text_layer_set_text_color(g_steps_layer, g_palette->peach);
-  else text_layer_set_text_color(g_steps_layer, GColorWhite); // debug fallback
+  else text_layer_set_text_color(g_steps_layer, GColorWhite);
 
   g_steps = -1;
   update_layer_text();
 
-  (void)g_steps_layer; // debug logging removed
+  (void)g_steps_layer; 
 
   g_enabled = false;
   steps_set_enabled(enabled);
