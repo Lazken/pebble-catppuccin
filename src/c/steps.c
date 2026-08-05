@@ -24,7 +24,7 @@ static void update_layer_text(void) {
 void steps_set_palette(const CatppuccinPalette *palette) {
   g_palette = palette;
   if (g_steps_layer && g_palette) {
-    text_layer_set_text_color(g_steps_layer, g_palette->peach);
+    text_layer_set_text_color(g_steps_layer, g_palette->red);
   }
 }
 
@@ -83,7 +83,7 @@ void steps_window_load(Window *window, GFont icon_font, const CatppuccinPalette 
     layer_add_child(window_layer, text_layer_get_layer(g_steps_layer));
   }
 
-  if (g_palette) text_layer_set_text_color(g_steps_layer, g_palette->peach);
+  if (g_palette) text_layer_set_text_color(g_steps_layer, g_palette->red);
 
   g_steps = -1;
   update_layer_text();

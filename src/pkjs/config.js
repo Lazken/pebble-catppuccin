@@ -34,7 +34,10 @@ module.exports = [
           { label: 'Passive (peek + subscribe)', value: '0' },
           { label: 'Live (continuous sampling)', value: '1' }
         ],
-        description: 'Passive = OS-provided updates. Live = continuous sampling (higher battery use).'
+        description: 'Passive = OS-provided updates. Live = continuous sampling (higher battery use).',
+        required: [
+          { key: 'SHOW_HEARTRATE', value: true }
+        ]
       },
       {
         type: 'toggle',
