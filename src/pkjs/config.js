@@ -26,17 +26,22 @@ module.exports = [
         description: 'Show heart icon + BPM in the top-left corner'
       },
       {
-        type: 'input',
-        messageKey: 'SHOW_HEARTRATE_INTERVAL',
-        label: 'Heart-rate Interval (s)',
-        defaultValue: '60',
-        description: 'Seconds between heart-rate readings (min 15).',
-        attributes: {
-          type: 'number',
-          min: 15,
-          max: 3600,
-          step: 1
-        }
+        type: 'radiogroup',
+        messageKey: 'SHOW_HEARTRATE_MODE',
+        label: 'Heart Rate Mode',
+        defaultValue: '0',
+        options: [
+          { label: 'Passive (peek + subscribe)', value: '0' },
+          { label: 'Live (continuous sampling)', value: '1' }
+        ],
+        description: 'Passive = OS-provided updates. Live = continuous sampling (higher battery use).'
+      },
+      {
+        type: 'toggle',
+        messageKey: 'SHOW_STEPS',
+        label: 'Show Steps',
+        defaultValue: false,
+        description: 'Show walking icon + current step count at the bottom (centered).'
       },
     ],
   },
