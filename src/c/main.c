@@ -94,6 +94,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *hr_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_HEARTRATE);
   if (hr_tuple) {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_HEARTRATE tuple type=%d", hr_tuple->type);
     bool enabled = false;
     if (hr_tuple->type == TUPLE_CSTRING) {
       enabled = (strcmp(hr_tuple->value->cstring, "true") == 0 || strcmp(hr_tuple->value->cstring, "1") == 0);
@@ -125,6 +126,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *hr_mode_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_HEARTRATE_MODE);
   if (hr_mode_tuple) {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_HEARTRATE_MODE tuple type=%d", hr_mode_tuple->type);
     int mode = 0;
     if (hr_mode_tuple->type == TUPLE_CSTRING) {
       mode = atoi(hr_mode_tuple->value->cstring);
@@ -144,6 +146,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *steps_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_STEPS);
   if (steps_tuple) {
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_STEPS tuple type=%d", steps_tuple->type);
     bool enabled = false;
     if (steps_tuple->type == TUPLE_CSTRING) {
       enabled = (strcmp(steps_tuple->value->cstring, "true") == 0 || strcmp(steps_tuple->value->cstring, "1") == 0);

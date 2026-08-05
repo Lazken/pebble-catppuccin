@@ -24,7 +24,8 @@ static void update_layer_text(void) {
 void steps_set_palette(const CatppuccinPalette *palette) {
   g_palette = palette;
   if (g_steps_layer && g_palette) {
-    text_layer_set_text_color(g_steps_layer, g_palette->red);
+    // Steps should use the palette's peach color (not red). Use peach.
+    text_layer_set_text_color(g_steps_layer, g_palette->peach);
   }
 }
 
@@ -43,6 +44,7 @@ void steps_set_enabled(bool enabled) {
   g_enabled = enabled;
   if (g_enabled) {
 #if defined(PBL_HEALTH)
+    APP_LOG(APP_LOG_LEVEL_DEBUG, "steps_set_enabled: enabling steps module");
     time_t now = time(NULL);
     HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricStepCount, now, now);
     if (accessible & HealthServiceAccessibilityMaskAvailable) {
@@ -83,10 +85,13 @@ void steps_window_load(Window *window, GFont icon_font, const CatppuccinPalette 
     layer_add_child(window_layer, text_layer_get_layer(g_steps_layer));
   }
 
-  if (g_palette) text_layer_set_text_color(g_steps_layer, g_palette->red);
+  if (g_palette) text_layer_set_text_color(g_steps_layer, g_palette->peach);
+  else text_layer_set_text_color(g_steps_layer, GColorWhite); // debug fallback
 
   g_steps = -1;
   update_layer_text();
+
+  APP_LOG(APP_LOG_LEVEL_DEBUG, "steps_window_load: created layer %p", g_steps_layer);
 
   g_enabled = false;
   steps_set_enabled(enabled);
