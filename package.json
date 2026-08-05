@@ -1,6 +1,6 @@
 {
   "name": "pebbleCat",
-  "author": "MakeAwesomeHappen",
+  "author": "Laz",
   "version": "1.0.0",
   "keywords": [
     "pebble-app"
@@ -21,7 +21,8 @@
       "watchface": true
     },
     "capabilities": [
-      "configurable"
+      "configurable",
+      "health"
     ],
       "messageKeys": [
         "CATPPUCCIN_FLAVOR",
