@@ -18,6 +18,13 @@ module.exports = [
           { label: 'Mocha', value: 'mocha' },
         ],
       },
+      {
+        type: 'toggle',
+        messageKey: 'SHOW_HEARTRATE',
+        label: 'Show Heart Rate',
+        defaultValue: false,
+        description: 'Show heart icon + BPM in the top-left corner'
+      },
     ],
   },
   {

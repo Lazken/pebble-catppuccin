@@ -23,9 +23,10 @@
     "capabilities": [
       "configurable"
     ],
-    "messageKeys": [
-      "CATPPUCCIN_FLAVOR"
-    ],
+      "messageKeys": [
+        "CATPPUCCIN_FLAVOR",
+        "SHOW_HEARTRATE"
+      ],
     "resources": {
       "media": [
         {
@@ -57,7 +58,7 @@
           "type": "font",
           "name": "FONT_CASKAYICONS_24",
           "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf",
-          "characterRegex": "[ -~\uF4C8\uF240-\uF244]"
+          "characterRegex": "[ -~\uF4C8\uF240-\uF244\uF004]"
         }
       ]
     }
