@@ -80,20 +80,7 @@ static void apply_palette(void) {
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
-  // Debug: dump all incoming AppMessage keys and values so we can see exactly
-  // what the phone sends. This helps diagnose missing keys like SHOW_STEPS.
-  {
-    Tuple *t = dict_read_first(iterator);
-    while (t != NULL) {
-      APP_LOG(APP_LOG_LEVEL_DEBUG, "AppMessage received key=%d type=%d", (int)t->key, t->type);
-      if (t->type == TUPLE_CSTRING) {
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "  value='%s'", t->value->cstring);
-      } else if (t->type == TUPLE_INT) {
-        APP_LOG(APP_LOG_LEVEL_DEBUG, "  int=%d", (int)t->value->int32);
-      }
-      t = dict_read_next(iterator);
-    }
-  }
+  // (debug logging removed)
   Tuple *flavor_tuple = dict_find(iterator, MESSAGE_KEY_CATPPUCCIN_FLAVOR);
   if (flavor_tuple && flavor_tuple->type == TUPLE_CSTRING) {
     CatppuccinFlavor flavor = flavor_from_string(flavor_tuple->value->cstring);
@@ -107,7 +94,6 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *hr_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_HEARTRATE);
   if (hr_tuple) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_HEARTRATE tuple type=%d", hr_tuple->type);
     bool enabled = false;
     if (hr_tuple->type == TUPLE_CSTRING) {
       enabled = (strcmp(hr_tuple->value->cstring, "true") == 0 || strcmp(hr_tuple->value->cstring, "1") == 0);
@@ -139,7 +125,6 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *hr_mode_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_HEARTRATE_MODE);
   if (hr_mode_tuple) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_HEARTRATE_MODE tuple type=%d", hr_mode_tuple->type);
     int mode = 0;
     if (hr_mode_tuple->type == TUPLE_CSTRING) {
       mode = atoi(hr_mode_tuple->value->cstring);
@@ -159,7 +144,6 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
 
   Tuple *steps_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_STEPS);
   if (steps_tuple) {
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "inbox: SHOW_STEPS tuple type=%d", steps_tuple->type);
     bool enabled = false;
     if (steps_tuple->type == TUPLE_CSTRING) {
       enabled = (strcmp(steps_tuple->value->cstring, "true") == 0 || strcmp(steps_tuple->value->cstring, "1") == 0);

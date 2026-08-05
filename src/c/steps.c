@@ -14,9 +14,9 @@ static void update_layer_text(void) {
   static char buffer[32];
   /* Use the walking glyph (private use area U+E213) followed by the steps count. */
   if (g_steps >= 0) {
-    snprintf(buffer, sizeof(buffer), " %d", g_steps);
+    snprintf(buffer, sizeof(buffer), " %d", g_steps);
   } else {
-    snprintf(buffer, sizeof(buffer), " --");
+    snprintf(buffer, sizeof(buffer), " --");
   }
   text_layer_set_text(g_steps_layer, buffer);
 }
@@ -44,7 +44,6 @@ void steps_set_enabled(bool enabled) {
   g_enabled = enabled;
   if (g_enabled) {
 #if defined(PBL_HEALTH)
-    APP_LOG(APP_LOG_LEVEL_DEBUG, "steps_set_enabled: enabling steps module");
     time_t now = time(NULL);
     HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricStepCount, now, now);
     if (accessible & HealthServiceAccessibilityMaskAvailable) {
@@ -91,7 +90,7 @@ void steps_window_load(Window *window, GFont icon_font, const CatppuccinPalette 
   g_steps = -1;
   update_layer_text();
 
-  APP_LOG(APP_LOG_LEVEL_DEBUG, "steps_window_load: created layer %p", g_steps_layer);
+  (void)g_steps_layer; // debug logging removed
 
   g_enabled = false;
   steps_set_enabled(enabled);

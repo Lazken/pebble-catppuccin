@@ -61,7 +61,7 @@
           "type": "font",
           "name": "FONT_CASKAYICONS_24",
           "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf",
-          "characterRegex": "[ -~\uE213\uF4C8\uF240-\uF244\uF004]"
+          "characterRegex": "[ -~\uE213\uF4C8\uF240-\uF244\uF004]"
         }
       ]
     }
