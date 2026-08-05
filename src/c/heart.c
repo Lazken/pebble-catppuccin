@@ -13,6 +13,7 @@ static AppTimer *g_sample_timeout_timer = NULL;
 static uint32_t g_sample_interval_seconds = 60; // default, can be changed from config
 static const uint32_t g_sample_window_seconds = 10; // how long to allow sampling each attempt
 static bool g_sampling_active = false;
+static HeartMode g_mode = HEART_MODE_PASSIVE;
 
 static void update_layer_text(void) {
   if (!g_heart_layer) return;
@@ -120,8 +121,21 @@ void heart_set_enabled(bool enabled) {
   if (g_enabled == enabled) return;
   g_enabled = enabled;
   if (g_enabled) {
-    start_sample_now();
-    start_periodic_timer();
+    if (g_mode == HEART_MODE_LIVE) {
+      start_sample_now();
+      start_periodic_timer();
+    } else {
+      // Passive: just subscribe and peek current value
+#if defined(PBL_HEALTH)
+      time_t now = time(NULL);
+      HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricHeartRateBPM, now, now);
+      if (accessible & HealthServiceAccessibilityMaskAvailable) {
+        HealthValue v = health_service_peek_current_value(HealthMetricHeartRateBPM);
+        if (v > 0) heart_update_rate((int)v);
+      }
+      health_service_events_subscribe(health_handler, NULL);
+#endif
+    }
   } else {
     stop_periodic_timer();
     cancel_active_sampling();
@@ -135,12 +149,27 @@ void heart_update_rate(int bpm) {
   update_layer_text();
 }
 
-void heart_set_sample_interval_seconds(uint32_t seconds) {
-  if (seconds < 15) seconds = 15;
-  g_sample_interval_seconds = seconds;
-  if (g_periodic_timer) {
-    app_timer_cancel(g_periodic_timer);
-    g_periodic_timer = app_timer_register(g_sample_interval_seconds * 1000, periodic_timer_cb, NULL);
+void heart_set_mode(HeartMode mode) {
+  if (mode != HEART_MODE_PASSIVE && mode != HEART_MODE_LIVE) mode = HEART_MODE_PASSIVE;
+  if (g_mode == mode) return;
+  g_mode = mode;
+  if (!g_enabled) return;
+  if (g_mode == HEART_MODE_LIVE) {
+    // start live sampling
+    start_sample_now();
+    start_periodic_timer();
+  } else {
+    // switch to passive: stop active sampling and use peek+subscribe
+    cancel_active_sampling();
+#if defined(PBL_HEALTH)
+    time_t now = time(NULL);
+    HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricHeartRateBPM, now, now);
+    if (accessible & HealthServiceAccessibilityMaskAvailable) {
+      HealthValue v = health_service_peek_current_value(HealthMetricHeartRateBPM);
+      if (v > 0) heart_update_rate((int)v);
+    }
+    health_service_events_subscribe(health_handler, NULL);
+#endif
   }
 }
 

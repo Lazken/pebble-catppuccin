@@ -4,16 +4,21 @@
 #include "catppuccin.h"
 #include "battery.h"
 #include "heart.h"
+#include "steps.h"
 #define SETTINGS_KEY 1
 #define SETTINGS_KEY_HEARTRATE 2
-#define SETTINGS_KEY_HEARTRATE_INTERVAL 3
+#define SETTINGS_KEY_HEARTRATE_MODE 4
+#define SETTINGS_KEY_STEPS 5
 
 extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE;
+extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE_MODE;
+extern uint32_t MESSAGE_KEY_SHOW_STEPS;
 
 typedef struct {
   CatppuccinFlavor flavor;
   bool show_heartrate;
-  int hr_interval_seconds;
+  bool show_steps;
+  int hr_mode;
 } AppSettings;
 
 static Window *s_main_window;
@@ -28,13 +33,15 @@ static const CatppuccinPalette *s_palette;
 static void save_settings(void) {
   persist_write_int(SETTINGS_KEY, s_settings.flavor);
   persist_write_int(SETTINGS_KEY_HEARTRATE, s_settings.show_heartrate ? 1 : 0);
-  persist_write_int(SETTINGS_KEY_HEARTRATE_INTERVAL, s_settings.hr_interval_seconds);
+  persist_write_int(SETTINGS_KEY_HEARTRATE_MODE, s_settings.hr_mode);
+  persist_write_int(SETTINGS_KEY_STEPS, s_settings.show_steps ? 1 : 0);
 }
 
 static void load_settings(void) {
   s_settings.flavor = CATPPUCCIN_FLAVOR_MOCHA;
   s_settings.show_heartrate = false;
-  s_settings.hr_interval_seconds = 60;
+  s_settings.show_steps = false;
+  s_settings.hr_mode = 0;
   if (persist_exists(SETTINGS_KEY)) {
     int stored = persist_read_int(SETTINGS_KEY);
     if (stored >= CATPPUCCIN_FLAVOR_LATTE && stored <= CATPPUCCIN_FLAVOR_MOCHA) {
@@ -47,10 +54,14 @@ static void load_settings(void) {
     int stored = persist_read_int(SETTINGS_KEY_HEARTRATE);
     s_settings.show_heartrate = (stored != 0);
   }
-  if (persist_exists(SETTINGS_KEY_HEARTRATE_INTERVAL)) {
-    int stored = persist_read_int(SETTINGS_KEY_HEARTRATE_INTERVAL);
-    if (stored < 15) stored = 15;
-    s_settings.hr_interval_seconds = stored;
+  if (persist_exists(SETTINGS_KEY_HEARTRATE_MODE)) {
+    int stored = persist_read_int(SETTINGS_KEY_HEARTRATE_MODE);
+    if (stored != 0 && stored != 1) stored = 0;
+    s_settings.hr_mode = stored;
+  }
+  if (persist_exists(SETTINGS_KEY_STEPS)) {
+    int stored = persist_read_int(SETTINGS_KEY_STEPS);
+    s_settings.show_steps = (stored != 0);
   }
   s_palette = palette_for_flavor(s_settings.flavor);
 }
@@ -64,6 +75,7 @@ static void apply_palette(void) {
   if (s_date_layer) text_layer_set_text_color(s_date_layer, s_palette->blue);
   battery_set_palette(s_palette);
   heart_set_palette(s_palette);
+  steps_set_palette(s_palette);
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
@@ -96,6 +108,7 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         if (root) {
           if (s_settings.show_heartrate) {
             heart_window_load(s_main_window, s_battery_font, s_palette, true);
+            heart_set_mode((HeartMode)s_settings.hr_mode);
           } else {
             heart_window_unload();
           }
@@ -104,6 +117,53 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
         }
       } else {
         heart_set_enabled(s_settings.show_heartrate);
+      }
+    }
+  }
+
+  Tuple *hr_mode_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_HEARTRATE_MODE);
+  if (hr_mode_tuple) {
+    int mode = 0;
+    if (hr_mode_tuple->type == TUPLE_CSTRING) {
+      mode = atoi(hr_mode_tuple->value->cstring);
+    } else if (hr_mode_tuple->type == TUPLE_INT) {
+      mode = hr_mode_tuple->value->int32;
+    }
+    if (mode != 0 && mode != 1) mode = 0;
+    if (mode != s_settings.hr_mode) {
+      s_settings.hr_mode = mode;
+      persist_write_int(SETTINGS_KEY_HEARTRATE_MODE, s_settings.hr_mode);
+      // If heart is currently enabled, apply mode immediately
+      if (s_settings.show_heartrate) {
+        heart_set_mode((HeartMode)s_settings.hr_mode);
+      }
+    }
+  }
+
+  Tuple *steps_tuple = dict_find(iterator, MESSAGE_KEY_SHOW_STEPS);
+  if (steps_tuple) {
+    bool enabled = false;
+    if (steps_tuple->type == TUPLE_CSTRING) {
+      enabled = (strcmp(steps_tuple->value->cstring, "true") == 0 || strcmp(steps_tuple->value->cstring, "1") == 0);
+    } else if (steps_tuple->type == TUPLE_INT) {
+      enabled = (steps_tuple->value->int32 != 0);
+    }
+    if (enabled != s_settings.show_steps) {
+      s_settings.show_steps = enabled;
+      persist_write_int(SETTINGS_KEY_STEPS, s_settings.show_steps ? 1 : 0);
+      if (s_main_window) {
+        Layer *root = window_get_root_layer(s_main_window);
+        if (root) {
+          if (s_settings.show_steps) {
+            steps_window_load(s_main_window, s_battery_font, s_palette, true);
+          } else {
+            steps_window_unload();
+          }
+        } else {
+          steps_set_enabled(s_settings.show_steps);
+        }
+      } else {
+        steps_set_enabled(s_settings.show_steps);
       }
     }
   }
@@ -159,6 +219,10 @@ static void main_window_load(Window *window) {
   battery_window_load(window, s_battery_font, s_palette);
   if (s_settings.show_heartrate) {
     heart_window_load(window, s_battery_font, s_palette, true);
+    heart_set_mode((HeartMode)s_settings.hr_mode);
+  }
+  if (s_settings.show_steps) {
+    steps_window_load(window, s_battery_font, s_palette, true);
   }
 
   apply_palette();
@@ -169,6 +233,7 @@ static void main_window_unload(Window *window) {
   text_layer_destroy(s_date_layer);
   battery_window_unload();
   heart_window_unload();
+  steps_window_unload();
   fonts_unload_custom_font(s_time_font);
   fonts_unload_custom_font(s_date_font);
   fonts_unload_custom_font(s_battery_font);
