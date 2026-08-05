@@ -82,7 +82,22 @@ static void inbox_received_callback(DictionaryIterator *iterator, void *context)
     if (enabled != s_settings.show_heartrate) {
       s_settings.show_heartrate = enabled;
       persist_write_int(SETTINGS_KEY_HEARTRATE, s_settings.show_heartrate ? 1 : 0);
-      heart_set_enabled(s_settings.show_heartrate);
+      // If the main window is loaded, create/destroy the UI immediately. Otherwise
+      // defer to main_window_load which will create the UI if needed.
+      if (s_main_window) {
+        Layer *root = window_get_root_layer(s_main_window);
+        if (root) {
+          if (s_settings.show_heartrate) {
+            heart_window_load(s_main_window, s_battery_font, s_palette, true);
+          } else {
+            heart_window_unload();
+          }
+        } else {
+          heart_set_enabled(s_settings.show_heartrate);
+        }
+      } else {
+        heart_set_enabled(s_settings.show_heartrate);
+      }
     }
   }
 }
@@ -135,7 +150,9 @@ static void main_window_load(Window *window) {
   layer_add_child(window_layer, text_layer_get_layer(s_date_layer));
 
   battery_window_load(window, s_battery_font, s_palette);
-  heart_window_load(window, s_battery_font, s_palette, s_settings.show_heartrate);
+  if (s_settings.show_heartrate) {
+    heart_window_load(window, s_battery_font, s_palette, true);
+  }
 
   apply_palette();
 }
