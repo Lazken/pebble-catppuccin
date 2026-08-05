@@ -7,8 +7,8 @@
 #include "steps.h"
 #define SETTINGS_KEY 1
 #define SETTINGS_KEY_HEARTRATE 2
-#define SETTINGS_KEY_HEARTRATE_MODE 4
-#define SETTINGS_KEY_STEPS 5
+#define SETTINGS_KEY_HEARTRATE_MODE 3
+#define SETTINGS_KEY_STEPS 4
 
 extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE;
 // Use numeric message key IDs (matching package.json) to avoid relying on
