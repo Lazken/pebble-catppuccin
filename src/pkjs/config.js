@@ -25,6 +25,19 @@ module.exports = [
         defaultValue: false,
         description: 'Show heart icon + BPM in the top-left corner'
       },
+      {
+        type: 'input',
+        messageKey: 'SHOW_HEARTRATE_INTERVAL',
+        label: 'Heart-rate Interval (s)',
+        defaultValue: '60',
+        description: 'Seconds between heart-rate readings (min 15).',
+        attributes: {
+          type: 'number',
+          min: 15,
+          max: 3600,
+          step: 1
+        }
+      },
     ],
   },
   {

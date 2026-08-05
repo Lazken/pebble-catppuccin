@@ -15,3 +15,6 @@ void heart_set_enabled(bool enabled);
 
 // Manually update the displayed bpm (useful for tests)
 void heart_update_rate(int bpm);
+
+// Configure periodic sampling interval (seconds). Minimum enforced by caller.
+void heart_set_sample_interval_seconds(uint32_t seconds);

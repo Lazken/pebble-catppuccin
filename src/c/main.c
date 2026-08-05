@@ -6,16 +6,14 @@
 #include "heart.h"
 #define SETTINGS_KEY 1
 #define SETTINGS_KEY_HEARTRATE 2
+#define SETTINGS_KEY_HEARTRATE_INTERVAL 3
 
-// MESSAGE_KEY_* symbols are generated at build-time into build/include/message_keys.auto.h
-// Some build systems expose them as extern uint32_t variables. Declare the SHOW_HEARTRATE key
-// here as extern to ensure compilation if the auto-generated header hasn't been updated yet.
 extern uint32_t MESSAGE_KEY_SHOW_HEARTRATE;
-#define SETTINGS_KEY 1
 
 typedef struct {
   CatppuccinFlavor flavor;
   bool show_heartrate;
+  int hr_interval_seconds;
 } AppSettings;
 
 static Window *s_main_window;
@@ -30,20 +28,29 @@ static const CatppuccinPalette *s_palette;
 static void save_settings(void) {
   persist_write_int(SETTINGS_KEY, s_settings.flavor);
   persist_write_int(SETTINGS_KEY_HEARTRATE, s_settings.show_heartrate ? 1 : 0);
+  persist_write_int(SETTINGS_KEY_HEARTRATE_INTERVAL, s_settings.hr_interval_seconds);
 }
 
 static void load_settings(void) {
   s_settings.flavor = CATPPUCCIN_FLAVOR_MOCHA;
   s_settings.show_heartrate = false;
+  s_settings.hr_interval_seconds = 60;
   if (persist_exists(SETTINGS_KEY)) {
     int stored = persist_read_int(SETTINGS_KEY);
     if (stored >= CATPPUCCIN_FLAVOR_LATTE && stored <= CATPPUCCIN_FLAVOR_MOCHA) {
       s_settings.flavor = (CatppuccinFlavor)stored;
     }
   }
+
+  
   if (persist_exists(SETTINGS_KEY_HEARTRATE)) {
     int stored = persist_read_int(SETTINGS_KEY_HEARTRATE);
     s_settings.show_heartrate = (stored != 0);
+  }
+  if (persist_exists(SETTINGS_KEY_HEARTRATE_INTERVAL)) {
+    int stored = persist_read_int(SETTINGS_KEY_HEARTRATE_INTERVAL);
+    if (stored < 15) stored = 15;
+    s_settings.hr_interval_seconds = stored;
   }
   s_palette = palette_for_flavor(s_settings.flavor);
 }
@@ -186,11 +193,8 @@ static void init(void) {
 }
 
 static void deinit(void) {
-  // Unsubscribe services and close app message before destroying windows
   tick_timer_service_unsubscribe();
   battery_state_service_unsubscribe();
-  // Deregister app message callbacks and close the channel
-  // app_message_deregister_callbacks is available in the SDK; call it if present
   app_message_deregister_callbacks();
 
   window_destroy(s_main_window);

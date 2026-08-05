@@ -8,14 +8,16 @@ static const CatppuccinPalette *g_palette = NULL;
 static bool g_enabled = false;
 static int g_bpm = -1; // -1 = unknown
 static GFont g_font = NULL;
+static AppTimer *g_periodic_timer = NULL;
+static AppTimer *g_sample_timeout_timer = NULL;
+static uint32_t g_sample_interval_seconds = 60; // default, can be changed from config
+static const uint32_t g_sample_window_seconds = 10; // how long to allow sampling each attempt
+static bool g_sampling_active = false;
 
 static void update_layer_text(void) {
   if (!g_heart_layer) return;
   static char buffer[16];
-  // FontAwesome heart glyph (U+F004) literal: ""
   if (g_bpm >= 0) {
-    /* Use literal FontAwesome heart glyph (U+F004). The glyph is also
-       present in the JS bundle so the font subsetting picks it up. */
     snprintf(buffer, sizeof(buffer), " %d", g_bpm);
   } else {
     snprintf(buffer, sizeof(buffer), " --");
@@ -30,7 +32,6 @@ void heart_set_palette(const CatppuccinPalette *palette) {
   }
 }
 
-// HealthService handler (used on devices with PBL_HEALTH)
 static void health_handler(HealthEventType event, void *context) {
   if (event == HealthEventHeartRateUpdate) {
     HealthValue v = health_service_peek_current_value(HealthMetricHeartRateBPM);
@@ -41,47 +42,106 @@ static void health_handler(HealthEventType event, void *context) {
 }
 
 static void heart_unsubscribe_all(void) {
-  // Unsubscribe HealthService events if available
 #if defined(PBL_HEALTH)
   health_service_events_unsubscribe();
 #endif
 }
 
-static void heart_subscribe(void) {
+static void start_sample_now(void);
+
+static void sampling_expired_cb(void *context) {
+#if defined(PBL_HEALTH)
+  health_service_set_heart_rate_sample_period(0);
+  health_service_events_unsubscribe();
+#endif
+  g_sampling_active = false;
+  if (g_sample_timeout_timer) {
+    app_timer_cancel(g_sample_timeout_timer);
+    g_sample_timeout_timer = NULL;
+  }
+}
+
+static void periodic_timer_cb(void *context) {
+  if (!g_enabled) return;
+  if (g_sampling_active) {
+    if (g_periodic_timer) { app_timer_cancel(g_periodic_timer); g_periodic_timer = NULL; }
+    g_periodic_timer = app_timer_register(g_sample_interval_seconds * 1000, periodic_timer_cb, NULL);
+    return;
+  }
+  start_sample_now();
+  if (g_periodic_timer) { app_timer_cancel(g_periodic_timer); g_periodic_timer = NULL; }
+  g_periodic_timer = app_timer_register(g_sample_interval_seconds * 1000, periodic_timer_cb, NULL);
+}
+
+static void start_periodic_timer(void) {
+  if (g_periodic_timer) return;
+  g_periodic_timer = app_timer_register(g_sample_interval_seconds * 1000, periodic_timer_cb, NULL);
+}
+
+static void stop_periodic_timer(void) {
+  if (g_periodic_timer) {
+    app_timer_cancel(g_periodic_timer);
+    g_periodic_timer = NULL;
+  }
+}
+
+static void start_sample_now(void) {
   if (!g_enabled) return;
 #if defined(PBL_HEALTH)
-  // Subscribe to HealthService events for heart-rate updates.
+  {
+    time_t now = time(NULL);
+    HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricHeartRateBPM, now, now);
+    if (!(accessible & HealthServiceAccessibilityMaskAvailable)) return;
+  }
+  health_service_set_heart_rate_sample_period((uint16_t)g_sample_window_seconds);
   health_service_events_subscribe(health_handler, NULL);
-  // Try to peek latest heart rate now
+  g_sampling_active = true;
   {
     HealthValue v = health_service_peek_current_value(HealthMetricHeartRateBPM);
     if (v > 0) {
       heart_update_rate((int)v);
     }
   }
+  if (g_sample_timeout_timer) { app_timer_cancel(g_sample_timeout_timer); g_sample_timeout_timer = NULL; }
+  g_sample_timeout_timer = app_timer_register(g_sample_window_seconds * 1000, sampling_expired_cb, NULL);
 #endif
-  update_layer_text();
 }
 
-static void heart_unsubscribe(void) {
-  heart_unsubscribe_all();
-  g_bpm = -1;
-  update_layer_text();
+static void cancel_active_sampling(void) {
+  if (g_sample_timeout_timer) { app_timer_cancel(g_sample_timeout_timer); g_sample_timeout_timer = NULL; }
+#if defined(PBL_HEALTH)
+  health_service_set_heart_rate_sample_period(0);
+  health_service_events_unsubscribe();
+#endif
+  g_sampling_active = false;
 }
 
 void heart_set_enabled(bool enabled) {
   if (g_enabled == enabled) return;
   g_enabled = enabled;
   if (g_enabled) {
-    heart_subscribe();
+    start_sample_now();
+    start_periodic_timer();
   } else {
-    heart_unsubscribe();
+    stop_periodic_timer();
+    cancel_active_sampling();
+    g_bpm = -1;
+    update_layer_text();
   }
 }
 
 void heart_update_rate(int bpm) {
   g_bpm = bpm;
   update_layer_text();
+}
+
+void heart_set_sample_interval_seconds(uint32_t seconds) {
+  if (seconds < 15) seconds = 15;
+  g_sample_interval_seconds = seconds;
+  if (g_periodic_timer) {
+    app_timer_cancel(g_periodic_timer);
+    g_periodic_timer = app_timer_register(g_sample_interval_seconds * 1000, periodic_timer_cb, NULL);
+  }
 }
 
 void heart_window_load(Window *window, GFont heart_font, const CatppuccinPalette *palette, bool enabled) {
