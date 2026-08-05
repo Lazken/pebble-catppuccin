@@ -81,6 +81,20 @@ static void apply_palette(void) {
 }
 
 static void inbox_received_callback(DictionaryIterator *iterator, void *context) {
+  // Debug: dump all incoming AppMessage keys and values so we can see exactly
+  // what the phone sends. This helps diagnose missing keys like SHOW_STEPS.
+  {
+    Tuple *t = dict_read_first(iterator);
+    while (t != NULL) {
+      APP_LOG(APP_LOG_LEVEL_DEBUG, "AppMessage received key=%d type=%d", (int)t->key, t->type);
+      if (t->type == TUPLE_CSTRING) {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "  value='%s'", t->value->cstring);
+      } else if (t->type == TUPLE_INT) {
+        APP_LOG(APP_LOG_LEVEL_DEBUG, "  int=%d", (int)t->value->int32);
+      }
+      t = dict_read_next(iterator);
+    }
+  }
   Tuple *flavor_tuple = dict_find(iterator, MESSAGE_KEY_CATPPUCCIN_FLAVOR);
   if (flavor_tuple && flavor_tuple->type == TUPLE_CSTRING) {
     CatppuccinFlavor flavor = flavor_from_string(flavor_tuple->value->cstring);
