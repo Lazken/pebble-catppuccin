@@ -99,7 +99,7 @@ void steps_window_load(Window *window, GFont icon_font, const CatppuccinPalette 
   Layer *window_layer = window_get_root_layer(window);
   GRect bounds = layer_get_bounds(window_layer);
 
-  int margin = 2;
+  int margin = 5;
   int height = 24;
 
   g_font = icon_font;

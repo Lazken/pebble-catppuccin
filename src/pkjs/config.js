@@ -22,7 +22,7 @@ module.exports = [
         type: 'toggle',
         messageKey: 'SHOW_HEARTRATE',
         label: 'Show Heart Rate',
-        defaultValue: false,
+        defaultValue: true,
         description: 'Show heart icon + BPM in the top-left corner'
       },
       {
@@ -43,7 +43,7 @@ module.exports = [
         type: 'toggle',
         messageKey: 'SHOW_STEPS',
         label: 'Show Steps',
-        defaultValue: false,
+        defaultValue: true,
         description: 'Show walking icon + current step count at the bottom (centered).'
       },
     ],
