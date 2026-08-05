@@ -24,12 +24,11 @@
       "configurable",
       "health"
     ],
-      "messageKeys": {
-        "CATPPUCCIN_FLAVOR": 10000,
-        "SHOW_HEARTRATE": 10001,
-        "SHOW_HEARTRATE_MODE": 10002,
-        "SHOW_STEPS": 10003
-      },
+      "messageKeys": [
+        "CATPPUCCIN_FLAVOR",
+        "SHOW_HEARTRATE",
+        "SHOW_HEARTRATE_INTERVAL"
+      ],
     "resources": {
       "media": [
         {
@@ -61,7 +60,7 @@
           "type": "font",
           "name": "FONT_CASKAYICONS_24",
           "file": "fonts/CaskaydiaCoveNerdFont-Regular.ttf",
-          "characterRegex": "[ -~\uF4C8\uF240-\uF244\uF004\\uE213]"
+          "characterRegex": "[ -~\uE213\uF4C8\uF240-\uF244\uF004]"
         }
       ]
     }
