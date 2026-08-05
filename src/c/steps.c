@@ -44,12 +44,29 @@ void steps_set_enabled(bool enabled) {
   g_enabled = enabled;
   if (g_enabled) {
 #if defined(PBL_HEALTH)
+    // Always subscribe to health events so we receive updates when available.
+    health_service_events_subscribe(health_handler, NULL);
+
+    // Check accessibility over a reasonable range (start of day -> now) for step totals.
     time_t now = time(NULL);
-    HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricStepCount, now, now);
+    struct tm tm_now = *localtime(&now);
+    tm_now.tm_hour = 0;
+    tm_now.tm_min = 0;
+    tm_now.tm_sec = 0;
+    time_t start_of_day = mktime(&tm_now);
+
+    HealthServiceAccessibilityMask accessible = health_service_metric_accessible(HealthMetricStepCount, start_of_day, now);
+
+    // If accessible, peek the current value. Also attempt a peek even if accessibility
+    // reports not available, since some platforms return cumulative values regardless.
     if (accessible & HealthServiceAccessibilityMaskAvailable) {
       HealthValue v = health_service_peek_current_value(HealthMetricStepCount);
+      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x, peek=%d", (int)accessible, (int)v);
       if (v >= 0) steps_update_count((int)v);
-      health_service_events_subscribe(health_handler, NULL);
+    } else {
+      HealthValue v = health_service_peek_current_value(HealthMetricStepCount);
+      APP_LOG(APP_LOG_LEVEL_INFO, "steps: accessibility=0x%x (not available), peek=%d", (int)accessible, (int)v);
+      if (v >= 0) steps_update_count((int)v);
     }
 #endif
   } else {
